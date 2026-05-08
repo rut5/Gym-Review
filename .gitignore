@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+backend/.env
+backend/node_modules
+/.env
+=======
 # Dependencies
 node_modules/
 
@@ -7,3 +12,4 @@ dist/
 # Environment variables
 .env
 /src/generated/prisma
+>>>>>>> 8893a3bb2177e4c24c6e2e973b180082dead1b5f
