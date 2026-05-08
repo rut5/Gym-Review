@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -12,3 +13,18 @@ export default defineConfig({
     },
   },
 })
+=======
+import { defineConfig } from "vitest/config";
+
+export default defineConfig({
+  test: {
+    globals: true,
+    coverage: {
+      provider: "v8",
+      reporter: ["text"],
+      include: ["src/**/*.ts"],
+      exclude: ["src/generated/**", "src/index.ts"],
+    },
+  },
+});
+>>>>>>> 8893a3bb2177e4c24c6e2e973b180082dead1b5f
