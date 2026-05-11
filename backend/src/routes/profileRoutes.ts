@@ -1,5 +1,5 @@
 import { Router, type Response } from 'express';
-import authMiddleware from '../middleware/authMiddleware.ts';
+import authMiddleware from '../middleware/authMiddleware';
 
 const router = Router();
 
