@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 
-function ReviewForm() {
-  const params = useParams();
-  const id = params.id;
+type ReviewProps = {
+  placeId: string;
+};
 
+function ReviewForm({ placeId }: ReviewProps) {
   const [rating, setRatings] = useState(null);
   const [comment, setComments] = useState("");
 
@@ -18,7 +18,7 @@ function ReviewForm() {
     const reviewData = { rating, comment };
 
     // Creates a new review in db for a specific place. Sends a POST req to backend.
-    const response = await fetch(`/places/${id}/reviews`, {
+    const response = await fetch(`/places/${placeId}/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

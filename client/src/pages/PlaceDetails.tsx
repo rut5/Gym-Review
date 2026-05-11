@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import PlaceList from "../components/PlaceList";
 import ReviewForm from "../components/ReviewForm";
+import PlaceInfo from "../components/PlaceInfo";
 
 // Display details for a single place (name, location, reviews) and the ReviewForm (if the user is logged in).
 function PlaceDetails() {
@@ -19,6 +20,7 @@ function PlaceDetails() {
   return (
     <>
       <PlaceList></PlaceList>;<ReviewForm></ReviewForm>;
+      <PlaceInfo place={place} />
     </>
   );
 }
