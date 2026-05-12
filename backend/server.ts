@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import app from "./src/app.ts";
+=======
+import app from "./src/app";
+>>>>>>> origin/main
 
 const port = Number(process.env.PORT ?? 4000);
 
