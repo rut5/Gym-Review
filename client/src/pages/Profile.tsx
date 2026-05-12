@@ -1,5 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import Login from "./Login";
+import { PacmanLoader } from "react-spinners";
 
 function Profile() {
   const { isAuthenticated, user, logout, isLoading } = useAuth0();
@@ -8,17 +9,7 @@ function Profile() {
     <>
       <div>
         {isLoading ? (
-          <div
-            style={{
-              width: "200px",
-              height: "100px",
-              borderRadius: "10px",
-              border: "1px solid darkgreen",
-              borderColor: "",
-              backgroundColor: "rgba(144, 238, 144, 0.8)",
-              fillOpacity: ".8",
-            }}
-          ></div>
+          <PacmanLoader cssOverride={{}} margin={2} size={25} />
         ) : isAuthenticated ? (
           <div>
             {user?.picture && (
