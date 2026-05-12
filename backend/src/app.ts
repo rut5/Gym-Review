@@ -22,6 +22,17 @@ app.use(
 app.use(express.json());
 
 app.use("/profile", profileRoutes);
+app.use("/places", placeRoutes);
+
+app.use(
+  "/gyms",
+  (req, res, next) => {
+    if (req.method === "POST") return requireAuth(req, res, next);
+    next();
+  },
+  placeRoutes,
+);
+app.use("/profile", profileRoutes);
 
 app.use(
   "/gyms",

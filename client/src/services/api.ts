@@ -1,12 +1,12 @@
-// frontend/src/services/api.ts
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import axios from 'axios'
 
-export const apiPaths = {
-  gyms: `${API_BASE_URL}/gyms`,
-  reviews: `${API_BASE_URL}/reviews`,
-  auth: {
-    login: `${API_BASE_URL}/auth/login`,
-    register: `${API_BASE_URL}/auth/register`,
-  },
-  // Add other endpoints as needed
-};
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:4000',
+  withCredentials: true,
+})
+
+export function authHeader(token: string) {
+  return { headers: { Authorization: `Bearer ${token}` } }
+}
+
+export default api
