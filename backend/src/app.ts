@@ -1,8 +1,10 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import profileRoutes from './routes/profileRoutes.ts';
-import errorMiddleware from './middleware/errorMiddleware.ts';
+import profileRoutes from './routes/profileRoutes';
+import placeRoutes from './routes/placeRoutes';
+import requireAuth from './middleware/authMiddleware';
+import errorMiddleware from './middleware/errorMiddleware';
 
 const app = express();
 const clientOrigin = process.env.CLIENT_ORIGIN ?? 'http://localhost:5173';
@@ -18,6 +20,11 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/profile', profileRoutes);
+
+app.use('/gyms', (req, res, next) => {
+  if (req.method === 'POST') return requireAuth(req, res, next);
+  next();
+}, placeRoutes);
 
 app.use(errorMiddleware);
 
