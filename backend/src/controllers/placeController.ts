@@ -54,7 +54,7 @@ export const createReview = (req: Request, res: Response): void => {
 
   const { author, rating, comment } = req.body;
 
-  if (!author || !rating) {
+  if (!author || typeof rating !== "number") {
     res.status(400).json({
       message: "Author and rating are required",
     });
