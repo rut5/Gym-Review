@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
   "compilerOptions": {
     "target": "ESNext",
@@ -12,18 +11,3 @@
   },
   "include": ["src/**/*"]
 }
-=======
-{
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "jsx": "react-jsx",
-    "allowJs": true,
-    "checkJs": false,
-    "strict": false,
-    "types": ["vite/client"]
-  },
-  "include": ["src/**/*"]
-}
->>>>>>> 0e82f488516e6f2c47ab67f9d1bf2edd4d0acf5c
