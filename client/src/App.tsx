@@ -10,11 +10,18 @@ function App() {
   return (
     <>
       <Auth0Provider
-        domain="dev-8myyc6moc1tx2lno.eu.auth0.com"
-        clientId="UwgUEb6idN5CJH4bswLz2ZQS5XMsIfm9"
+        domain="dev-r32x1zatjzntw3fr.us.auth0.com"
+        clientId="HmJrKr0a2VKR88rqpn0KJ0lrhbyW6uoq"
         authorizationParams={{
           redirect_uri: "http://localhost:5173/frontEnd/",
           scope: "openid profile email",
+        }}
+        onRedirectCallback={(appState) => {
+          window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname,
+          );
         }}
         cacheLocation="localstorage"
       >

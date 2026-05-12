@@ -1,43 +1,28 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
+import { PacmanLoader } from "react-spinners";
 
 export default function Login() {
-  // {authorizationParams: { screen_hint: "signup" }} --> tells Auth0 to show the signup screen instead of the login screen
-  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated, isLoading } = useAuth0();
 
+  useEffect(() => {
+    if (!isAuthenticated && !isLoading) {
+      loginWithRedirect({
+        authorizationParams: {
+          returnTo: "/",
+          screen_hint: "login",
+          scope: "openid profile email",
+        },
+      });
+    }
+  }, []);
   return (
     <>
-      <div>
-        {isAuthenticated === false ? (
-          <div>
-            <button
-              onClick={() =>
-                loginWithRedirect({
-                  authorizationParams: {
-                    scope: "openid profile email",
-                    prompt: "none",
-                  },
-                })
-              }
-            >
-              Login
-            </button>
-            <button
-              onClick={() =>
-                loginWithRedirect({
-                  authorizationParams: { screen_hint: "signup" },
-                })
-              }
-            >
-              Sign up
-            </button>
-          </div>
-        ) : (
-          <div>
-            <button onClick={() => logout()}>Logout</button>
-            <p content={user.email}>Email</p>
-          </div>
-        )}
-      </div>
+      {isLoading ? (
+        <PacmanLoader cssOverride={{}} margin={2} size={25} />
+      ) : isAuthenticated ? (
+        <button onClick={() => logout()}>Logout</button>
+      ) : null}
     </>
   );
 }
