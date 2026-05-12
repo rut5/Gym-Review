@@ -13,7 +13,7 @@ function App() {
         domain="dev-r32x1zatjzntw3fr.us.auth0.com"
         clientId="HmJrKr0a2VKR88rqpn0KJ0lrhbyW6uoq"
         authorizationParams={{
-          redirect_uri: "http://localhost:5173/frontEnd/",
+          redirect_uri: "http://localhost:5173",
           scope: "openid profile email",
         }}
         onRedirectCallback={(appState) => {
