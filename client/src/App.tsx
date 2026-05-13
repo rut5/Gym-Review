@@ -10,8 +10,8 @@ function App() {
   return (
     <>
       <Auth0Provider
-        domain="dev-r32x1zatjzntw3fr.us.auth0.com"
-        clientId="HmJrKr0a2VKR88rqpn0KJ0lrhbyW6uoq"
+        domain={import.meta.env.VITE_AUTH0_DOMAIN}
+        clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
         authorizationParams={{
           redirect_uri: "http://localhost:5173",
           scope: "openid profile email",
@@ -23,7 +23,6 @@ function App() {
             window.location.pathname,
           );
         }}
-        cacheLocation="localstorage"
       >
         <BrowserRouter>
           <nav>
