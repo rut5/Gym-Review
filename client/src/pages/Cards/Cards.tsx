@@ -13,7 +13,7 @@ function Cards() {
     const fetchPlace = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:3000/places/${id}`);
+        const response = await fetch(`http://localhost:4000/places/${id}`);
         if (!response.ok) throw new Error("Failed to fetch place");
         const data = await response.json();
         setPlace(data);
