@@ -1,0 +1,104 @@
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import ReviewForm from "../ReviewForm/ReviewForm";
+import { useAuth0 } from "@auth0/auth0-react";
+import "@testing-library/jest-dom";
+
+// Mock useAuth0 with proper token handling
+const mockGetAccessTokenSilently = vi.fn().mockResolvedValue("mock-token");
+
+vi.mock("@auth0/auth0-react", () => ({
+  useAuth0: vi.fn(() => ({
+    isAuthenticated: true,
+    getAccessTokenSilently: mockGetAccessTokenSilently,
+    getAccessTokenWithPopup: vi.fn(),
+    getIdTokenClaims: vi.fn(),
+    loginWithRedirect: vi.fn(),
+    loginWithPopup: vi.fn(),
+    logout: vi.fn(),
+    handleRedirectCallback: vi.fn(),
+    isLoading: false,
+    user: undefined,
+    error: undefined,
+  })),
+}));
+
+// Mock global fetch
+vi.stubGlobal("fetch", vi.fn());
+
+describe("ReviewForm Component", () => {
+  const mockPlaceId = "1";
+
+  beforeEach(() => {
+    vi.resetAllMocks();
+    mockGetAccessTokenSilently.mockResolvedValue("mock-token");
+  });
+
+  it("renders the form with select, textarea, and submit button", () => {
+    render(<ReviewForm placeId={mockPlaceId} />);
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
+    expect(screen.getByRole("textbox")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Submit Review/i }),
+    ).toBeInTheDocument();
+  });
+
+  it("does not submit if rating is invalid (less than 1)", async () => {
+    const { container } = render(<ReviewForm placeId={mockPlaceId} />);
+    const form = container.querySelector("form");
+    fireEvent.submit(form!);
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("does not submit if rating is invalid (greater than 5)", async () => {
+    const { container } = render(<ReviewForm placeId={mockPlaceId} />);
+    const select = screen.getByRole("combobox");
+    fireEvent.change(select, { target: { value: "6" } });
+    const form = container.querySelector("form");
+    fireEvent.submit(form!);
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("submits the form with valid rating and comment", async () => {
+    const { container } = render(<ReviewForm placeId={mockPlaceId} />);
+    const select = screen.getByRole("combobox");
+    const textarea = screen.getByRole("textbox");
+    const form = container.querySelector("form");
+
+    fireEvent.change(select, { target: { value: "5" } });
+    fireEvent.change(textarea, { target: { value: "Great place!" } });
+    fireEvent.submit(form!);
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledWith(
+        expect.stringContaining(`/places/${mockPlaceId}/reviews`),
+        expect.objectContaining({
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer mock-token",
+          },
+          body: JSON.stringify({
+            rating: 5,
+            comment: "Great place!",
+          }),
+        }),
+      );
+    });
+  });
+
+  it("calls getAccessTokenSilently when submitting", async () => {
+    const { container } = render(<ReviewForm placeId={mockPlaceId} />);
+    const select = screen.getByRole("combobox");
+    const textarea = screen.getByRole("textbox");
+    const form = container.querySelector("form");
+
+    fireEvent.change(select, { target: { value: "5" } });
+    fireEvent.change(textarea, { target: { value: "Great place!" } });
+    fireEvent.submit(form!);
+
+    await waitFor(() => {
+      expect(mockGetAccessTokenSilently).toHaveBeenCalled();
+    });
+  });
+});

@@ -1,66 +1,60 @@
 import { useState } from "react";
-import "./ReviewForm.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 type ReviewProps = {
   placeId: string;
 };
 
 function ReviewForm({ placeId }: ReviewProps) {
-  const [rating, setRating] = useState<number | null>(null);
-  const [comment, setComment] = useState("");
+  const [rating, setRatings] = useState<number | null>(null);
+  const [comment, setComments] = useState("");
+  const { getAccessTokenSilently } = useAuth0();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (rating === null || rating < 1 || rating > 5) return;
 
+    if (rating < 1 || rating > 5) return;
     const reviewData = { rating, comment };
-    await fetch(`/places/${placeId}/reviews`, {
+
+    const token = await getAccessTokenSilently();
+
+    const response = await fetch(`/places/${placeId}/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
+      credentials: "include",
       body: JSON.stringify(reviewData),
     });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="review-form">
-      <div className="form-group">
-        <label htmlFor="rating">Rating (1-5):</label>
+    <>
+      {/* Star rating system placeholder (replace with actual star UI later) */}
+      <form onSubmit={handleSubmit}>
         <select
-          id="rating"
-          value={rating || ""}
-          onChange={(e) => setRating(Number(e.target.value))}
-          className="rating-select"
-          required
+          value={rating ?? ""} // Fallback to empty string to avoid warning
+          onChange={(e) =>
+            setRatings(e.target.value ? Number(e.target.value) : null)
+          }
         >
           <option value="" disabled>
             Select a rating
           </option>
-          <option value="1">1 - Poor</option>
-          <option value="2">2 - Fair</option>
-          <option value="3">3 - Good</option>
-          <option value="4">4 - Very Good</option>
-          <option value="5">5 - Excellent</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
         </select>
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="comment">Your Review:</label>
         <textarea
-          id="comment"
           value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          className="comment-textarea"
-          placeholder="Share your experience..."
-          required
+          onChange={(e) => setComments(e.target.value)}
         />
-      </div>
-
-      <button type="submit" className="submit-button">
-        Submit Review
-      </button>
-    </form>
+        <button type="submit">Submit Review</button>
+      </form>
+    </>
   );
 }
 
