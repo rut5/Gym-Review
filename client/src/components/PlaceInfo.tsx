@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ReviewForm from "./ReviewForm";
+import ReviewForm from "./ReviewForm/ReviewForm";
 
 // Display data about a specific place (name, location etc)
 function PlaceInfo() {
