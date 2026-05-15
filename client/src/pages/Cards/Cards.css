@@ -1,0 +1,109 @@
+/* PlaceDetails.css */
+.place-details-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.place-details-container h1 {
+  font-size: 2rem;
+  color: #2d3436;
+  margin-bottom: 0.5rem;
+}
+
+.place-details-container > p {
+  color: #636e72;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.place-ratings {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: #2d3436;
+}
+
+.place-ratings span {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.reviews-section {
+  margin-top: 2rem;
+}
+
+.reviews-section h2 {
+  font-size: 1.5rem;
+  color: #2d3436;
+  margin-bottom: 1rem;
+}
+
+.review-card {
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+}
+
+.review-card p {
+  margin-bottom: 0.5rem;
+  color: #2d3436;
+}
+
+.review-card span {
+  color: #6c5ce7;
+  font-weight: bold;
+}
+
+/* ReviewForm Styles */
+.review-form {
+  margin-top: 2rem;
+  border-top: 1px solid #eee;
+  padding-top: 2rem;
+}
+
+.review-form h2 {
+  font-size: 1.5rem;
+  color: #2d3436;
+  margin-bottom: 1rem;
+}
+
+.review-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2d3436;
+  font-weight: 500;
+}
+
+.review-form input[type="number"],
+.review-form textarea,
+.review-form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.review-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.review-form button {
+  background-color: #6c5ce7;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.review-form button:hover {
+  background-color: #5649c0;
+}

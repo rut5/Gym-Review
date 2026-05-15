@@ -5,7 +5,15 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+<<<<<<< HEAD
     "dev": "tsx watch server.ts",
+=======
+<<<<<<< HEAD
+    "dev": "nodemon --exec tsx server.ts",
+=======
+    "dev": "tsx watch src/app.ts",
+>>>>>>> 484e807 (feat(ui): implement frontend pages and components for Safe Space app)
+>>>>>>> 9a7c3c5 (chore: resoliving merge conflicts)
     "build": "tsc",
     "test": "vitest",
     "start": "node ./dist/server.js"
@@ -36,9 +44,14 @@
     "@types/nock": "^10.0.3",
     "@types/node": "^25.6.0",
     "@types/supertest": "^7.2.0",
+<<<<<<< HEAD
     "nock": "^14.0.15",
     "supertest": "^7.2.2",
     "tsx": "^4.21.1",
+=======
+    "supertest": "^7.2.2",
+    "tsx": "^4.21.0",
+>>>>>>> 484e807 (feat(ui): implement frontend pages and components for Safe Space app)
     "vitest": "^4.1.5"
   }
 }
