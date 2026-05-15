@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 type ReviewProps = {
   placeId: string;
@@ -7,23 +8,24 @@ type ReviewProps = {
 function ReviewForm({ placeId }: ReviewProps) {
   const [rating, setRatings] = useState(null);
   const [comment, setComments] = useState("");
+  const { getAccessTokenSilently } = useAuth0();
 
-  // Prevent default form submission
   const handleSubmit = async (e) => {
-    // Stops the page to refresh when the form is submitted
     e.preventDefault();
 
-    // Rating from 1-5
     if (rating < 1 || rating > 5) return;
     const reviewData = { rating, comment };
 
-    // Creates a new review in db for a specific place. Sends a POST req to backend.
+    const token = await getAccessTokenSilently();
+
     const response = await fetch(`/places/${placeId}/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-      }, // Tells the server the data is JSON
-      body: JSON.stringify(reviewData), // Converts { rating, comment } to a JSON string
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: "include",
+      body: JSON.stringify(reviewData),
     });
   };
 

@@ -32,16 +32,6 @@ app.use(
   },
   placeRoutes,
 );
-app.use("/profile", profileRoutes);
-
-app.use(
-  "/gyms",
-  (req, res, next) => {
-    if (req.method === "POST") return requireAuth(req, res, next);
-    next();
-  },
-  placeRoutes,
-);
 
 app.use(errorMiddleware);
 
