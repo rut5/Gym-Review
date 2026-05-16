@@ -126,6 +126,7 @@ Screenshot of Passing GitHub Actions Pipeline:
 
 
 ![image alt](https://github.com/MiniMinaa/gym-review-api/blob/main/bild.png?raw=true)
+![image alt](https://github.com/MiniMinaa/gym-review-api/blob/main/bild%20(1).png?raw=true)
 
 
 ---
