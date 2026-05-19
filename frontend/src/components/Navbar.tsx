@@ -6,12 +6,15 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="navbar-logo">GymReview</Link>
+      <Link to="/" className="navbar-logo">
+        <img src="/dumbbell-logo.png" alt="" className="navbar-logo-img" />
+        GymReview
+      </Link>
       <div className="navbar-actions">
         {!isLoading && (
           isAuthenticated ? (
             <>
-              <Link to="/add" className="btn btn-outline">+ Add Gym</Link>
+              <Link to="/add" className="btn btn-nav-add">+ Add Gym</Link>
               <span className="navbar-user">{user?.name}</span>
               <button
                 className="btn btn-primary"

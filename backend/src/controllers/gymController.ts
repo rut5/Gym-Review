@@ -30,11 +30,11 @@ export const getSingleGym = (req: Request, res: Response): void => {
 };
 
 export const createNewGym = (req: Request, res: Response): void => {
-  const { name, location, description } = req.body;
+  const { name, location, description, imageUrl } = req.body;
 
-  if (!name || !location) {
+  if (!name || !location || !imageUrl) {
     res.status(400).json({
-      message: "Name and location are required",
+      message: "Name, location, and image are required",
     });
 
     return;
@@ -44,6 +44,7 @@ export const createNewGym = (req: Request, res: Response): void => {
     name,
     location,
     description,
+    imageUrl,
   });
 
   res.status(201).json(newGym);

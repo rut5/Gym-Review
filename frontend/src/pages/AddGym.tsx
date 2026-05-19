@@ -10,6 +10,8 @@ export default function AddGym() {
   const [name, setName] = useState('')
   const [location, setLocation] = useState('')
   const [description, setDescription] = useState('')
+  const [imageUrl, setImageUrl] = useState<string | null>(null)
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -19,13 +21,26 @@ export default function AddGym() {
     }
   }, [isLoading, isAuthenticated, loginWithRedirect])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      const result = reader.result as string
+      setImageUrl(result)
+      setImagePreview(result)
+    }
+    reader.readAsDataURL(file)
+  }
+
+  const handleSubmit = async (e: { preventDefault(): void }) => {
     e.preventDefault()
+    if (!imageUrl) return
     setSubmitting(true)
     setError(null)
     try {
       const token = await getAccessTokenSilently()
-      const gym = await createGym({ name, location, description }, token)
+      const gym = await createGym({ name, location, description, imageUrl }, token)
       navigate(`/gyms/${gym.id}`)
     } catch {
       setError('Failed to create gym. Please try again.')
@@ -40,7 +55,7 @@ export default function AddGym() {
   return (
     <div className="page page-narrow">
       <button className="btn-back" onClick={() => navigate('/')}>← Back to gyms</button>
-      <h1>Add a Gym</h1>
+      <h1>Add a gym</h1>
       <form onSubmit={handleSubmit} className="gym-form">
         <div className="form-group">
           <label htmlFor="name">Gym Name *</label>
@@ -49,7 +64,7 @@ export default function AddGym() {
             type="text"
             value={name}
             onChange={e => setName(e.target.value)}
-            placeholder="e.g. Iron House Gym"
+            placeholder="The name of the gym"
             required
           />
         </div>
@@ -60,7 +75,7 @@ export default function AddGym() {
             type="text"
             value={location}
             onChange={e => setLocation(e.target.value)}
-            placeholder="e.g. Malmö"
+            placeholder="Where the gym is located"
             required
           />
         </div>
@@ -74,15 +89,32 @@ export default function AddGym() {
             rows={4}
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="image">Gym Image *</label>
+          <label htmlFor="image" className="image-upload-label">
+            {imagePreview ? (
+              <img src={imagePreview} alt="Preview" className="image-upload-preview" />
+            ) : (
+              <span className="image-upload-placeholder">Click to upload an image</span>
+            )}
+          </label>
+          <input
+            id="image"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="image-upload-input"
+          />
+        </div>
         {error && <p className="form-error">{error}</p>}
         <div className="form-actions">
-          <button type="button" className="btn btn-outline" onClick={() => navigate('/')}>
+          <button type="button" className="btn btn-cancel" onClick={() => navigate('/')}>
             Cancel
           </button>
           <button
             type="submit"
-            className="btn btn-primary"
-            disabled={submitting || !name || !location}
+            className="btn btn-dark"
+            disabled={submitting || !name || !location || !imageUrl}
           >
             {submitting ? 'Adding...' : 'Add Gym'}
           </button>

@@ -138,9 +138,3 @@ Protected routes require a valid token and return `401 Unauthorized` otherwise.
 - Add pagination for the gym list
 
 ---
-
-## Group Members
-
-- Lo Streit
-- Mina Rostami
-- Rut Wintzell

@@ -10,6 +10,7 @@ export interface Gym {
   name: string;
   location: string;
   description?: string;
+  imageUrl?: string;
   reviews: Review[];
 }
 
@@ -19,6 +20,7 @@ export const gyms: Gym[] = [
     name: "CrossFit Paradise",
     location: "Malmö",
     description: "Det största CrossFit gymmet i Skåne med toppmoderna faciliteter",
+    imageUrl: "/gym-8.webp",
     reviews: [],
   },
   {
@@ -26,6 +28,15 @@ export const gyms: Gym[] = [
     name: "Fitness Hub",
     location: "Lund",
     description: "Ett modernt träningscenter med fokus på gruppträning",
+    imageUrl: "/gym-10.webp",
+    reviews: [],
+  },
+  {
+    id: 3,
+    name: "Träningscentralen",
+    location: "Stockholm",
+    description: "Klassiskt gym i hjärtat av Stockholm med allt du behöver",
+    imageUrl: "/gym-2.jpg",
     reviews: [],
   },
 ];

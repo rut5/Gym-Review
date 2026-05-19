@@ -26,7 +26,7 @@ export default function GymDetail() {
       .finally(() => setLoading(false))
   }, [id])
 
-  const handleReview = async (e: React.FormEvent) => {
+  const handleReview = async (e: { preventDefault(): void }) => {
     e.preventDefault()
     if (!gym || !user) return
     setSubmitting(true)
@@ -63,79 +63,87 @@ export default function GymDetail() {
     <div className="page">
       <button className="btn-back" onClick={() => navigate('/')}>← Back to gyms</button>
 
-      <div className="gym-detail-header">
-        <div>
-          <h1>{gym.name}</h1>
-          <p className="gym-location">📍 {gym.location}</p>
-          {gym.description && <p className="gym-description">{gym.description}</p>}
-        </div>
-        {avg && <div className="rating-badge">⭐ {avg}</div>}
-      </div>
-
-      <section className="reviews-section">
-        <h2>Reviews ({gym.reviews.length})</h2>
-        {gym.reviews.length === 0 ? (
-          <p className="status">No reviews yet — be the first!</p>
-        ) : (
-          <div className="reviews-list">
-            {gym.reviews.map(review => (
-              <div key={review.id} className="review-card">
-                <div className="review-header">
-                  <span className="review-author">{review.author}</span>
-                  <span className="review-rating">{'⭐'.repeat(review.rating)}</span>
-                </div>
-                {review.comment && <p className="review-comment">{review.comment}</p>}
-              </div>
-            ))}
-          </div>
+      <div className="gym-detail-card">
+        {gym.imageUrl && (
+          <img src={gym.imageUrl} alt={gym.name} className="gym-detail-img" />
         )}
-      </section>
 
-      <section className="add-review-section">
-        <h2>Leave a Review</h2>
-        {isAuthenticated ? (
-          <form onSubmit={handleReview} className="review-form">
-            <div className="form-group">
-              <label>Rating</label>
-              <div className="star-selector">
-                {[1, 2, 3, 4, 5].map(n => (
-                  <button
-                    key={n}
-                    type="button"
-                    className={`star ${n <= rating ? 'active' : ''}`}
-                    onClick={() => setRating(n)}
-                  >
-                    ★
-                  </button>
+        <div className="gym-detail-body">
+          <div className="gym-detail-header">
+            <div>
+              <h1>{gym.name}</h1>
+              <p className="gym-location">📍 {gym.location}</p>
+              {gym.description && <p className="gym-description">{gym.description}</p>}
+            </div>
+            {avg && <div className="rating-badge">⭐ {avg}</div>}
+          </div>
+
+          <section className="reviews-section">
+            <h2>Reviews ({gym.reviews.length})</h2>
+            {gym.reviews.length === 0 ? (
+              <p className="status">No reviews yet — be the first!</p>
+            ) : (
+              <div className="reviews-list">
+                {gym.reviews.map(review => (
+                  <div key={review.id} className="review-card">
+                    <div className="review-header">
+                      <span className="review-author">{review.author}</span>
+                      <span className="review-rating">{'⭐'.repeat(review.rating)}</span>
+                    </div>
+                    {review.comment && <p className="review-comment">{review.comment}</p>}
+                  </div>
                 ))}
               </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="comment">Comment (optional)</label>
-              <textarea
-                id="comment"
-                value={comment}
-                onChange={e => setComment(e.target.value)}
-                placeholder="Share your experience..."
-                rows={4}
-              />
-            </div>
-            {submitError && <p className="form-error">{submitError}</p>}
-            <button type="submit" className="btn btn-primary" disabled={submitting}>
-              {submitting ? 'Submitting...' : 'Submit Review'}
-            </button>
-          </form>
-        ) : (
-          <div className="auth-prompt">
-            <p>
-              <button className="link-btn" onClick={() => loginWithRedirect()}>
-                Log in
-              </button>{' '}
-              to leave a review.
-            </p>
-          </div>
-        )}
-      </section>
+            )}
+          </section>
+
+          <section className="add-review-section">
+            <h2>Leave a review</h2>
+            {isAuthenticated ? (
+              <form onSubmit={handleReview} className="review-form">
+                <div className="form-group">
+                  <label>Rating</label>
+                  <div className="star-selector">
+                    {[1, 2, 3, 4, 5].map(n => (
+                      <button
+                        key={n}
+                        type="button"
+                        className={`star ${n <= rating ? 'active' : ''}`}
+                        onClick={() => setRating(n)}
+                      >
+                        ★
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="comment">Comment (optional)</label>
+                  <textarea
+                    id="comment"
+                    value={comment}
+                    onChange={e => setComment(e.target.value)}
+                    placeholder="Share your experience..."
+                    rows={4}
+                  />
+                </div>
+                {submitError && <p className="form-error">{submitError}</p>}
+                <button type="submit" className="btn btn-primary" disabled={submitting}>
+                  {submitting ? 'Submitting...' : 'Submit review'}
+                </button>
+              </form>
+            ) : (
+              <div className="auth-prompt">
+                <p>
+                  <button className="link-btn" onClick={() => loginWithRedirect()}>
+                    Log in
+                  </button>{' '}
+                  to leave a review
+                </p>
+              </div>
+            )}
+          </section>
+        </div>
+      </div>
     </div>
   )
 }

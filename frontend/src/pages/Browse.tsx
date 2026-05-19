@@ -27,7 +27,7 @@ export default function Browse() {
   return (
     <div className="page">
       <div className="page-header">
-        <h1>Browse Gyms</h1>
+        <h1 className="browse-title">Browse Gyms</h1>
       </div>
 
       {gyms.length === 0 ? (
@@ -38,6 +38,9 @@ export default function Browse() {
             const avg = avgRating(gym)
             return (
               <Link to={`/gyms/${gym.id}`} key={gym.id} className="gym-card">
+                {gym.imageUrl && (
+                  <img src={gym.imageUrl} alt={gym.name} className="gym-card-img" />
+                )}
                 <h2 className="gym-card-name">{gym.name}</h2>
                 <p className="gym-card-location">📍 {gym.location}</p>
                 {gym.description && (

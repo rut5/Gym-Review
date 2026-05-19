@@ -10,5 +10,6 @@ export interface Gym {
   name: string
   location: string
   description?: string
+  imageUrl?: string
   reviews: Review[]
 }
