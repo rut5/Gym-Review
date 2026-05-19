@@ -1,21 +1,13 @@
 {
   "name": "gym-review-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "REST API for reviewing gyms",
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix client\""
+    "dev": "npm run dev --prefix backend",
+    "test": "npm run test --prefix backend"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "devDependencies": {
-    "@types/jest": "^30.0.0",
-    "@types/supertest": "^7.2.0",
-    "concurrently": "^9.2.1",
-    "jest": "^30.3.0",
-    "supertest": "^7.2.2",
-    "ts-jest": "^29.4.9"
-  }
+  "type": "commonjs"
 }

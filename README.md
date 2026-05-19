@@ -119,15 +119,15 @@ Integration tests verify how multiple parts of the application work together.
 - `GET /profile` without a token returns 401
 
 Screenshot of Passing Local Tests:
-![image alt](https://github.com/MiniMinaa/gym-review-api/blob/main/bild%20(2).png?raw=true)
+![Screenshot of passing local tests](images/test-3.png)
 
 
 
 Screenshot of Passing GitHub Actions Pipeline:
 
 
-![image alt](https://github.com/MiniMinaa/gym-review-api/blob/main/bild.png?raw=true)
-![image alt](https://github.com/MiniMinaa/gym-review-api/blob/main/bild%20(1).png?raw=true)
+![Screenshot of passing GitHub Actions pipeline](images/test-1.png)
+![Screenshot of passing GitHub Actions pipeline](images/test-2.png)
 
 
 ---

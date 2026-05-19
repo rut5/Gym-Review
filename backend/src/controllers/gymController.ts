@@ -1,35 +1,35 @@
 import { type Request, type Response } from "express";
 
 import {
-  getAllPlaces,
-  getPlaceById,
-  createPlace,
-  addReviewToPlace,
-} from "../services/placeService.js";
+  getAllGyms,
+  getGymById,
+  createGym,
+  addReviewToGym,
+} from "../services/gymService.js";
 
-export const getPlaces = (req: Request, res: Response): void => {
-  const places = getAllPlaces();
+export const getGyms = (req: Request, res: Response): void => {
+  const gyms = getAllGyms();
 
-  res.status(200).json(places);
+  res.status(200).json(gyms);
 };
 
-export const getSinglePlace = (req: Request, res: Response): void => {
-  const placeId = Number(req.params.id);
+export const getSingleGym = (req: Request, res: Response): void => {
+  const gymId = Number(req.params.id);
 
-  const place = getPlaceById(placeId);
+  const gym = getGymById(gymId);
 
-  if (!place) {
+  if (!gym) {
     res.status(404).json({
-      message: "Place not found",
+      message: "Gym not found",
     });
 
     return;
   }
 
-  res.status(200).json(place);
+  res.status(200).json(gym);
 };
 
-export const createNewPlace = (req: Request, res: Response): void => {
+export const createNewGym = (req: Request, res: Response): void => {
   const { name, location, description } = req.body;
 
   if (!name || !location) {
@@ -40,17 +40,17 @@ export const createNewPlace = (req: Request, res: Response): void => {
     return;
   }
 
-  const newPlace = createPlace({
+  const newGym = createGym({
     name,
     location,
     description,
   });
 
-  res.status(201).json(newPlace);
+  res.status(201).json(newGym);
 };
 
 export const createReview = (req: Request, res: Response): void => {
-  const placeId = Number(req.params.id);
+  const gymId = Number(req.params.id);
 
   const { author, rating, comment } = req.body;
 
@@ -62,7 +62,7 @@ export const createReview = (req: Request, res: Response): void => {
     return;
   }
 
-  const review = addReviewToPlace(placeId, {
+  const review = addReviewToGym(gymId, {
     author,
     rating,
     comment,
@@ -70,7 +70,7 @@ export const createReview = (req: Request, res: Response): void => {
 
   if (!review) {
     res.status(404).json({
-      message: "Place not found",
+      message: "Gym not found",
     });
 
     return;

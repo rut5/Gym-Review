@@ -2,27 +2,25 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import profileRoutes from "./routes/profileRoutes";
-import placeRoutes from "./routes/placeRoutes";
+import gymRoutes from "./routes/gymRoutes";
 import requireAuth from "./middleware/authMiddleware";
 import errorMiddleware from "./middleware/errorMiddleware";
 
 const app = express();
-const clientOrigin = process.env.CLIENT_ORIGIN ?? "http://localhost:5173";
 
 app.disable("x-powered-by");
 
+app.use(express.json());
 app.use(
   cors({
-    origin: clientOrigin,
+    origin: process.env.CLIENT_ORIGIN,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
-app.use(express.json());
 
 app.use("/profile", profileRoutes);
-app.use("/places", placeRoutes);
 
 app.use(
   "/gyms",
@@ -30,7 +28,7 @@ app.use(
     if (req.method === "POST") return requireAuth(req, res, next);
     next();
   },
-  placeRoutes,
+  gymRoutes,
 );
 
 app.use(errorMiddleware);

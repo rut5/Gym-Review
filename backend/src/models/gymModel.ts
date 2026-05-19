@@ -5,7 +5,7 @@ export interface Review {
   comment?: string;
 }
 
-export interface Place {
+export interface Gym {
   id: number;
   name: string;
   location: string;
@@ -13,19 +13,19 @@ export interface Place {
   reviews: Review[];
 }
 
-export const places: Place[] = [
+export const gyms: Gym[] = [
   {
     id: 1,
-    name: "Central Cafe",
+    name: "CrossFit Paradise",
     location: "Malmö",
-    description: "Cozy coffee place",
-    reviews: [], //leaving reviews empty for now
+    description: "Det största CrossFit gymmet i Skåne med toppmoderna faciliteter",
+    reviews: [],
   },
   {
     id: 2,
     name: "Fitness Hub",
     location: "Lund",
-    description: "Modern training center",
+    description: "Ett modernt träningscenter med fokus på gruppträning",
     reviews: [],
   },
 ];
