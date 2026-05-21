@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "dev": "tsx watch server.ts",
+    "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "test": "vitest",
     "start": "node ./dist/server.js"

@@ -2,9 +2,10 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
-    "module": "ESNext",
-    "target": "ESNext",
-    "moduleResolution": "bundler",
+    "module": "CommonJS",
+    "target": "ES2022",
+    "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
     "types": ["node"],
     "sourceMap": true,
     "declaration": true,
