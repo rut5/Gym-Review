@@ -27,7 +27,7 @@ export default function Browse() {
   return (
     <div className="browse-page">
       <div className="hero-section">
-        <h1 className="browse-title">Find Your Perfect Gym</h1>
+        <h1 className="browse-title">Find The Gym For You</h1>
         <p className="browse-subtitle">Discover and review gyms in your area</p>
         {gyms.length > 0 && (
           <span className="gym-count-badge">
@@ -37,7 +37,7 @@ export default function Browse() {
       </div>
 
       {gyms.length === 0 ? (
-        <div className="status">No gyms yet — log in and add the first one!</div>
+        <div className="status">No gyms yet - log in and add the first one!</div>
       ) : (
         <div className="gym-grid">
           {gyms.map(gym => {
