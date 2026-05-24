@@ -202,6 +202,8 @@ a {
   width: 100%;
 }
 
+/* NEW HERO SECTION WITH BACKGROUND */ 
+
 .hero-section {
   display: flex;
   flex-direction: column;
@@ -209,7 +211,18 @@ a {
   text-align: center;
   gap: 0.75rem;
   padding: 0.5rem 2rem 2.75rem;
+
+  /* Background properties */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('background-gym.jpg');
+  background-size: cover;       /* Spans the whole x-view (and y-view of the section) */
+  background-position: center;  /* Keeps the gym image centered */
+  background-repeat: no-repeat;
+  
+  /* Sizing behavior */
+  width: 100%;                  
 }
+
+/**/
 
 .browse-title {
   font-family: var(--font-heading);
@@ -243,6 +256,84 @@ a {
   text-transform: uppercase;
 }
 
+/* ── Hero filter bar ─────────────────────────────────── */
+
+.hero-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.city-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 0.6rem 2.5rem 0.6rem 1rem;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 210px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.city-select:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.22);
+}
+
+.city-select option {
+  background: #1c1917;
+  color: #ffffff;
+}
+
+.btn-near-me {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.btn-near-me:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.26);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.btn-near-me:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.loc-error {
+  color: #fecaca;
+  font-size: 0.85rem;
+  margin-top: -0.25rem;
+}
+
 /* ── Status ──────────────────────────────────────────── */
 
 .status {
@@ -254,6 +345,7 @@ a {
 
 .status.error {
   color: #fecaca;
+  font-size: 1.2rem;
 }
 
 /* Status inside white cards should stay dark */
