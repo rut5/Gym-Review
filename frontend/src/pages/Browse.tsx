@@ -29,11 +29,6 @@ export default function Browse() {
       <div className="hero-section">
         <h1 className="browse-title">Find The Gym For You</h1>
         <p className="browse-subtitle">Discover and review gyms in your area</p>
-        {gyms.length > 0 && (
-          <span className="gym-count-badge">
-            {gyms.length} {gyms.length === 1 ? 'gym' : 'gyms'} listed
-          </span>
-        )}
       </div>
 
       {gyms.length === 0 ? (

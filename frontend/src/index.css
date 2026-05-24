@@ -23,7 +23,7 @@
 }
 
 html {
-  font-size: 18px;
+  font-size: 15px;
 }
 
 body {
@@ -112,7 +112,7 @@ a {
 .btn-primary:hover:not(:disabled),
 .btn-dark:hover:not(:disabled),
 .btn-cancel:hover {
-  background: #f0efee;
+  background: #d6d4d0;
 }
 
 .btn-primary:disabled,
