@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gymreview
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ../backend
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/gymreview
+      AUTH0_AUDIENCE: ${AUTH0_AUDIENCE}
+      AUTH0_ISSUER_BASE_URL: ${AUTH0_ISSUER_BASE_URL}
+      CLIENT_ORIGIN: http://localhost:5173
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ../frontend
+      args:
+        VITE_AUTH0_DOMAIN: ${VITE_AUTH0_DOMAIN}
+        VITE_AUTH0_CLIENT_ID: ${VITE_AUTH0_CLIENT_ID}
+        VITE_AUTH0_AUDIENCE: ${VITE_AUTH0_AUDIENCE}
+        VITE_API_URL: http://localhost:4000
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
