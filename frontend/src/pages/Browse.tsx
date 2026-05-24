@@ -79,7 +79,7 @@ export default function Browse() {
         }
       },
       () => {
-        setLocError('Location access denied.')
+        setLocError('Location access denied')
         setLocLoading(false)
       }
     )

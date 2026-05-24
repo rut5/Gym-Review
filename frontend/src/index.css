@@ -215,8 +215,7 @@ a {
 
   /* Full-bleed: break out of the max-width container and flush with navbar */
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-left: calc(50% - 50vw);
   width: 100vw;
   margin-top: calc(-2.5rem - 4px);
 }
@@ -343,9 +342,8 @@ a {
 }
 
 .loc-error {
-  color: #fecaca;
-  font-size: 0.85rem;
-  margin-top: -0.25rem;
+  color: #ffffff;
+  font-size: 1.45rem;
 }
 
 /* ── Status ──────────────────────────────────────────── */
@@ -353,11 +351,6 @@ a {
 .status {
   text-align: center;
   padding: 4rem 2rem;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.95rem;
-}
-
-.status.error {
   color: #ffffff;
   font-size: 1.45rem;
 }
