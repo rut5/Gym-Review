@@ -100,35 +100,25 @@ a {
 }
 
 .btn-primary,
-.btn-dark {
+.btn-dark,
+.btn-cancel {
   background: #ffffff;
   color: #1c1917;
   border: 2px solid #1c1917;
   font-weight: 600;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s;
 }
 
 .btn-primary:hover:not(:disabled),
-.btn-dark:hover:not(:disabled) {
-  background: #1c1917;
-  color: #ffffff;
+.btn-dark:hover:not(:disabled),
+.btn-cancel:hover {
+  background: #f0efee;
 }
 
 .btn-primary:disabled,
 .btn-dark:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-}
-
-.btn-cancel {
-  background: transparent;
-  color: #6b7280;
-  border: 1.5px solid #d1d5db;
-}
-
-.btn-cancel:hover {
-  background: #f3f4f6;
-  border-color: #9ca3af;
 }
 
 .btn-back {
