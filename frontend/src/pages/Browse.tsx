@@ -70,10 +70,10 @@ export default function Browse() {
           if (city) {
             setSelectedCity(city)
           } else {
-            setLocError('Could not find a matching city near your location.')
+            setLocError('Could not find a matching city near your location')
           }
         } catch {
-          setLocError('Failed to detect your city.')
+          setLocError('Failed to detect your city')
         } finally {
           setLocLoading(false)
         }
@@ -88,9 +88,6 @@ export default function Browse() {
   const filteredGyms = selectedCity
     ? gyms.filter(gym => gymMatchesCity(gym, selectedCity))
     : gyms
-
-  if (loading) return <div className="status">Loading gyms...</div>
-  if (error) return <div className="status error">{error}</div>
 
   return (
     <div className="browse-page">
@@ -122,7 +119,11 @@ export default function Browse() {
         {locError && <p className="loc-error">{locError}</p>}
       </div>
 
-      {selectedCity && filteredGyms.length === 0 ? (
+      {loading ? (
+        <div className="status">Loading gyms...</div>
+      ) : error ? (
+        <div className="status error">{error}</div>
+      ) : selectedCity && filteredGyms.length === 0 ? (
         <div className="status">
           There are no registered gyms in this city on Gym Review
         </div>
