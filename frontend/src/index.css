@@ -59,7 +59,7 @@ a {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--accent);
+  color: #ffffff;
   letter-spacing: 0.02em;
   display: flex;
   align-items: center;
@@ -99,73 +99,44 @@ a {
   white-space: nowrap;
 }
 
-.btn-primary {
-  background: var(--primary);
-  color: white;
+.btn-primary,
+.btn-dark {
+  background: #ffffff;
+  color: #1c1917;
+  border: 2px solid #1c1917;
+  font-weight: 600;
+  transition: background 0.15s, color 0.15s;
 }
 
-.btn-primary:hover:not(:disabled) {
-  background: var(--primary-hover);
+.btn-primary:hover:not(:disabled),
+.btn-dark:hover:not(:disabled) {
+  background: #1c1917;
+  color: #ffffff;
 }
 
-.btn-primary:disabled {
-  opacity: 0.55;
+.btn-primary:disabled,
+.btn-dark:disabled {
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
-.btn-outline {
-  background: transparent;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-.btn-outline:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.7);
-}
-
-.btn-nav-add {
-  background: transparent !important;
-  color: #ffffff !important;
-  border: 1.5px solid #ffffff !important;
-}
-
-.btn-nav-add:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-}
-
 .btn-cancel {
-  background: #e5e7eb;
-  color: #374151;
+  background: transparent;
+  color: #6b7280;
   border: 1.5px solid #d1d5db;
 }
 
 .btn-cancel:hover {
-  background: #d1d5db;
+  background: #f3f4f6;
   border-color: #9ca3af;
 }
 
-.btn-dark {
-  background: #9a3412;
-  color: #ffffff;
-  border: none;
-}
-
-.btn-dark:hover:not(:disabled) {
-  background: #7c2d12;
-}
-
-.btn-dark:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
 .btn-back {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #ffffff;
+  background: #ffffff;
+  color: #1c1917;
+  border: none;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 600;
   padding: 0.4rem 1rem;
   border-radius: 8px;
@@ -177,17 +148,17 @@ a {
 }
 
 .btn-back:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .link-btn {
   background: none;
   border: none;
-  color: var(--accent);
+  color: var(--text);
   cursor: pointer;
   font-size: inherit;
   padding: 0;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .link-btn:hover {
@@ -353,11 +324,9 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-heading);
   font-size: 3.5rem;
   font-weight: 800;
   color: rgba(255, 255, 255, 0.28);
-  letter-spacing: -0.02em;
 }
 
 .gym-card-content {
@@ -368,11 +337,9 @@ a {
 }
 
 .gym-card-name {
-  font-family: var(--font-heading);
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text);
-  letter-spacing: 0.01em;
 }
 
 .gym-card-location {
@@ -499,11 +466,9 @@ a {
 
 .reviews-section h2,
 .add-review-section h2 {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 600;
   margin-bottom: 1rem;
-  letter-spacing: 0.01em;
   color: var(--text);
 }
 

@@ -14,7 +14,7 @@ export default function Navbar() {
         {!isLoading && (
           isAuthenticated ? (
             <>
-              <Link to="/add" className="btn btn-nav-add">+ Add Gym</Link>
+              <Link to="/add" className="btn btn-primary">+ Add Gym</Link>
               <span className="navbar-user">{user?.name}</span>
               <button
                 className="btn btn-primary"

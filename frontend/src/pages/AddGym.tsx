@@ -113,7 +113,7 @@ export default function AddGym() {
           </button>
           <button
             type="submit"
-            className="btn btn-dark"
+            className="btn btn-primary"
             disabled={submitting || !name || !location || !imageUrl}
           >
             {submitting ? 'Adding...' : 'Add Gym'}
