@@ -25,9 +25,15 @@ export default function Browse() {
   if (error) return <div className="status error">{error}</div>
 
   return (
-    <div className="page">
-      <div className="page-header">
-        <h1 className="browse-title">Browse Gyms</h1>
+    <div className="browse-page">
+      <div className="hero-section">
+        <h1 className="browse-title">Find Your Perfect Gym</h1>
+        <p className="browse-subtitle">Discover and review gyms in your area</p>
+        {gyms.length > 0 && (
+          <span className="gym-count-badge">
+            {gyms.length} {gyms.length === 1 ? 'gym' : 'gyms'} listed
+          </span>
+        )}
       </div>
 
       {gyms.length === 0 ? (
@@ -38,23 +44,31 @@ export default function Browse() {
             const avg = avgRating(gym)
             return (
               <Link to={`/gyms/${gym.id}`} key={gym.id} className="gym-card">
-                {gym.imageUrl && (
-                  <img src={gym.imageUrl} alt={gym.name} className="gym-card-img" />
-                )}
-                <h2 className="gym-card-name">{gym.name}</h2>
-                <p className="gym-card-location">📍 {gym.location}</p>
-                {gym.description && (
-                  <p className="gym-card-desc">{gym.description}</p>
-                )}
-                <div className="gym-card-footer">
-                  {avg ? (
-                    <span className="rating">⭐ {avg}</span>
+                <div className="gym-card-img-wrap">
+                  {gym.imageUrl ? (
+                    <img src={gym.imageUrl} alt={gym.name} className="gym-card-img" />
                   ) : (
-                    <span className="no-reviews">No reviews yet</span>
+                    <div className="gym-card-img-placeholder">
+                      {gym.name.charAt(0).toUpperCase()}
+                    </div>
                   )}
-                  <span className="review-count">
-                    {gym.reviews.length} {gym.reviews.length === 1 ? 'review' : 'reviews'}
-                  </span>
+                </div>
+                <div className="gym-card-content">
+                  <h2 className="gym-card-name">{gym.name}</h2>
+                  <p className="gym-card-location">📍 {gym.location}</p>
+                  {gym.description && (
+                    <p className="gym-card-desc">{gym.description}</p>
+                  )}
+                  <div className="gym-card-footer">
+                    {avg ? (
+                      <span className="rating">⭐ {avg}</span>
+                    ) : (
+                      <span className="no-reviews">No reviews yet</span>
+                    )}
+                    <span className="review-count">
+                      {gym.reviews.length} {gym.reviews.length === 1 ? 'review' : 'reviews'}
+                    </span>
+                  </div>
                 </div>
               </Link>
             )
