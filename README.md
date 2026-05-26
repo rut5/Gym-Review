@@ -113,11 +113,6 @@ VITE_AUTH0_AUDIENCE=https://gym-review-api
 docker compose -f docker/docker-compose.yml up --build
 ```
 
-| Service  | URL                    |
-|----------|------------------------|
-| Frontend | http://localhost:5173  |
-| Backend  | http://localhost:4000  |
-
 ### 3. Stop everything
 
 ```bash
@@ -196,12 +191,19 @@ npm test
 - `POST /gyms/:id/reviews` without a token returns 401
 - `GET /profile` without a token returns 401
 
-Screenshot of passing local tests:
-![Screenshot of passing local tests](images/test-3.png)
+All 13 tests passing locally:
 
-Screenshot of passing GitHub Actions pipeline:
-![Screenshot of passing GitHub Actions pipeline](images/test-1.png)
-![Screenshot of passing GitHub Actions pipeline](images/test-2.png)
+![Backend tests passing in terminal](images/terminal-backend-tests.png)
+
+### CI Pipeline (GitHub Actions)
+
+All 13 tests passing in CI:
+
+![Backend Tests passing in GitHub Actions](images/github-backend-tests.png)
+
+Render deploy triggered automatically after tests pass:
+
+![Deploy to Render job succeeding](images/github-render-deploy.png)
 
 ---
 
